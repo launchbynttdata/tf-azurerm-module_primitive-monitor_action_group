@@ -10,16 +10,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-module "resource_group" {
-  source  = "terraform.registry.launch.nttdata.com/module_primitive/resource_group/azurerm"
-  version = "~> 1.0"
-
-  name     = local.resource_group_name
-  location = var.region
-  tags = {
-    resource_name = local.resource_group_name
-  }
-}
 
 # This module generates the resource-name of resources based on resource_type, naming_prefix, env etc.
 module "resource_names" {
@@ -38,9 +28,21 @@ module "resource_names" {
   logical_product_service = var.logical_product_service
 }
 
+module "resource_group" {
+  source  = "terraform.registry.launch.nttdata.com/module_primitive/resource_group/azurerm"
+  version = "~> 1.0"
+
+  name     = local.resource_group_name
+  location = var.location
+
+  tags = merge(var.tags, { resource_name = module.resource_names["resource_group"].standard })
+}
+
 module "monitor_action_group" {
   source              = "../.."
   action_group_name   = var.action_group_name
-  resource_group_name = local.resource_group_name
+  resource_group_name = module.resource_group.name
   action_groups       = var.action_groups
+
+  depends_on = [module.resource_group]
 }

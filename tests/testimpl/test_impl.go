@@ -39,7 +39,7 @@ func TestMonitorActionGroupModule(t *testing.T, ctx types.TestContext) {
 
 	t.Run("doesMonitorActionGroupExist", func(t *testing.T) {
 		resourceGroupName := terraform.Output(t, ctx.TerratestTerraformOptions(), "resource_group_name")
-		MonitorActionGroupName := terraform.Output(t, ctx.TerratestTerraformOptions(), "monitor_action_group_name")
+		MonitorActionGroupName := terraform.Output(t, ctx.TerratestTerraformOptions(), "action_group_name")
 
 		MonitorActionGroup, err := armMonitorClient.Get(context.Background(), resourceGroupName, MonitorActionGroupName, nil)
 		if err != nil {

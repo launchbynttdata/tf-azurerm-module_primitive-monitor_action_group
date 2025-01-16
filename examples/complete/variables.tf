@@ -91,6 +91,18 @@ variable "logical_product_family" {
   }
 }
 
+variable "location" {
+  description = "target resource group resource mask"
+  type        = string
+  default     = "eastus"
+}
+
+variable "tags" {
+  description = "Custom tags for the Grafana instance"
+  type        = map(string)
+  default     = {}
+}
+
 variable "logical_product_service" {
   type        = string
   description = <<EOF

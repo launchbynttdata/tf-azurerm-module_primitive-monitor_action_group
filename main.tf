@@ -10,38 +10,27 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-data "azurerm_role_definition" "builtin" {
-  for_each = local.arm_role_receivers
-
-  name = each.key
-}
-
 resource "azurerm_monitor_action_group" "monitor_action_group" {
-  for_each = var.action_groups != null ? var.action_groups : {}
 
   name                = var.action_group_name
   resource_group_name = var.resource_group_name
-  short_name          = each.key
+  short_name          = var.short_name
   tags                = merge(local.default_tags, var.tags)
 
   dynamic "arm_role_receiver" {
-    for_each = each.value.arm_role_receivers != null ? each.value.arm_role_receivers : toset([])
+    for_each = var.arm_role_receivers
     content {
-      name = arm_role_receiver.key
-      role_id = replace(
-        data.azurerm_role_definition.builtin[arm_role_receiver.key].role_definition_id,
-        "/\\/.*\\//",
-        ""
-      )
-      use_common_alert_schema = true
+      name                    = arm_role_receiver.value.name
+      role_id                 = arm_role_receiver.value.role_id
+      use_common_alert_schema = arm_role_receiver.value.use_common_alert_schema
     }
   }
   dynamic "email_receiver" {
-    for_each = each.value.email_receivers != null ? each.value.email_receivers : toset([])
+    for_each = var.email_receivers
     content {
-      name                    = each.value.email_receivers.email_receiver_name
-      email_address           = each.value.email_receivers.email_address
-      use_common_alert_schema = true
+      name                    = email_receiver.value.name
+      email_address           = email_receiver.value.email_address
+      use_common_alert_schema = email_receiver.value.use_common_alert_schema
     }
   }
 }

@@ -39,10 +39,12 @@ module "resource_group" {
 }
 
 module "monitor_action_group" {
-  source              = "../.."
+  source = "../.."
+
   action_group_name   = var.action_group_name
   resource_group_name = module.resource_group.name
-  action_groups       = var.action_groups
-
-  depends_on = [module.resource_group]
+  short_name          = var.short_name
+  arm_role_receivers  = var.arm_role_receivers
+  email_receivers     = var.email_receivers
+  depends_on          = [module.resource_group]
 }

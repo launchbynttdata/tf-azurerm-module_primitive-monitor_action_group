@@ -48,6 +48,6 @@ No resources.
 | Name | Description |
 |------|-------------|
 | <a name="output_resource_group_name"></a> [resource\_group\_name](#output\_resource\_group\_name) | Resource group name of the managed action group instance |
-| <a name="output_action_group_name"></a> [action\_group\_name](#output\_action\_group\_name) | Resource group name of the managed action group instance |
+| <a name="output_action_group_name"></a> [action\_group\_name](#output\_action\_group\_name) | Action group name of the managed action group instance |
 | <a name="output_action_group_id"></a> [action\_group\_id](#output\_action\_group\_id) | The ID of the created action group. |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

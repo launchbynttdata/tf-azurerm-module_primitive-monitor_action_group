@@ -12,11 +12,11 @@
 
 
 output "action_group_id" {
-  value       = [for ag in azurerm_monitor_action_group.monitor_action_group : ag.id]
+  value       = azurerm_monitor_action_group.monitor_action_group.id
   description = "The ID value that was allocated."
 }
 
 output "action_group_name" {
-  value       = [for ag in azurerm_monitor_action_group.monitor_action_group : ag.name]
+  value       = azurerm_monitor_action_group.monitor_action_group.name #[for ag in azurerm_monitor_action_group.monitor_action_group : ag.name]
   description = "The name value that was allocated."
 }

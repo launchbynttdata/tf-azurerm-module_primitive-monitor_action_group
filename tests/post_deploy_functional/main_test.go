@@ -33,7 +33,7 @@ func TestMonitorActionGroup(t *testing.T) {
 		SetTestConfigFileName(infraTFVarFileNameDefault).
 		SetTestSpecificFlags(map[string]types.TestFlags{
 			"complete": {
-				"IS_TERRAFORM_IDEMPOTENT_APPLY": false,
+				"IS_TERRAFORM_IDEMPOTENT_APPLY": true,
 				"SKIP_TEST":                     false,
 			},
 		}).

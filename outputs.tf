@@ -17,6 +17,6 @@ output "action_group_id" {
 }
 
 output "action_group_name" {
-  value       = azurerm_monitor_action_group.monitor_action_group.name #[for ag in azurerm_monitor_action_group.monitor_action_group : ag.name]
+  value       = azurerm_monitor_action_group.monitor_action_group.name
   description = "The name value that was allocated."
 }

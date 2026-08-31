@@ -15,7 +15,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestMonitorActionGroupModule(t *testing.T, ctx types.TestContext) {
+func TestComposableMonitorActionGroupModule(t *testing.T, ctx types.TestContext) {
 	subscriptionId := os.Getenv("ARM_SUBSCRIPTION_ID")
 	if len(subscriptionId) == 0 {
 		t.Fatal("ARM_SUBSCRIPTION_ID environment variable is not set")
@@ -38,8 +38,8 @@ func TestMonitorActionGroupModule(t *testing.T, ctx types.TestContext) {
 	}
 
 	t.Run("doesMonitorActionGroupExist", func(t *testing.T) {
-		resourceGroupName := terraform.Output(t, ctx.TerratestTerraformOptions(), "resource_group_name")
-		MonitorActionGroupName := terraform.Output(t, ctx.TerratestTerraformOptions(), "action_group_name")
+		resourceGroupName := terraform.OutputContext(t, context.Background(), ctx.TerratestTerraformOptions(), "resource_group_name")
+		MonitorActionGroupName := terraform.OutputContext(t, context.Background(), ctx.TerratestTerraformOptions(), "action_group_name")
 
 		MonitorActionGroup, err := armMonitorClient.Get(context.Background(), resourceGroupName, MonitorActionGroupName, nil)
 		if err != nil {

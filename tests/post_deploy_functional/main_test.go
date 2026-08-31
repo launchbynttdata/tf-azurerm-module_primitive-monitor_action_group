@@ -39,5 +39,5 @@ func TestMonitorActionGroup(t *testing.T) {
 		}).
 		Build()
 
-	lib.RunSetupTestTeardown(t, *ctx, testimpl.TestMonitorActionGroupModule)
+	lib.RunSetupTestTeardown(t, *ctx, testimpl.TestComposableMonitorActionGroupModule)
 }
